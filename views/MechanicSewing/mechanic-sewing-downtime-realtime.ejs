@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" class="sidebar_minimize">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Phubai Innovation</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Open+Sans:300,400,600,700"] },
+            custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/azzara.min.css">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="./assets/css/demo.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!--
+			Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
+		-->
+        <div class="main-header" data-background-color="purple">
+            <!-- Logo Header -->
+            <div class="logo-header">
+
+                <a href="/" class="logo">
+                    <h2 class="navbar-brand" style="color: white;">Phubai Innovation</h2>
+                </a>
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </button>
+                <button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
+                <div class="navbar-minimize">
+                    <button class="btn btn-minimize btn-rounded">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- End Logo Header -->
+
+            <!-- Navbar Header -->
+            <nav class="navbar navbar-header navbar-expand-lg">
+                <span class="navbar-brand text-white">
+                    <img src="./assets/img/icons8-innovate-64.png" width="30" height="30" alt="">
+                    Báo cáo downtime máy may theo thời gian thực
+                </span>
+
+                <div class="container-fluid">
+                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                        <li style="margin-right: 15px;">
+                            <div class="container-fluid text-left">
+                                <div class="row justify-content-center">
+
+                                    <div class="input-group" style="width: 200px;margin-right: 10px;">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-primary text-white" style="border: 0;">Ngày
+                                            </div>
+                                        </div>
+                                        <input type="date" class="form-control" id="date_query" >
+                                    </div>
+
+                                    <div class="input-group" style="width: 230px; margin-right: 10px;"
+                                        style="display: block;">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-danger text-white" style="border: 0;">Trạng thái
+                                            </div>
+                                        </div>
+                                        <select class="form-control" id="mode_query" style="padding: 0;border-radius: 0;">
+                                            <option value="" selected>Toàn bộ</option>
+                                            <option value="100" selected >Đang hỏng & Sửa</option>
+                                            <option value="0" >Đã Sửa</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group" style="width: 200px; margin-right: 15px;"
+                                        style="display: block;">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-warning text-white" style="border: 0;">Ca làm việc
+                                            </div>
+                                        </div>
+                                        <select class="form-control" id="mode_shift" style="padding: 0;border-radius: 0;">
+                                            <option value="morning_shift">Ca sáng</option>
+                                            <option value="afternoon_shift" >Ca chiều</option>
+                                            <option value="0">Cả ngày</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group" style="width: 120px;margin-right: 15px;">
+                                        <button class="btn btn-success" id="btn_update_board">Lọc dữ liệu</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avatar-sm">
+                                <img src="./assets/img/icons8-clock-64.png" alt="..." class="avatar-img">
+                            </div>
+                        </li>
+                        <li class="text-white text-center" style="margin-right: 20px;">
+                            <p id="text_schedule_shift" style="font-size: 24px;margin-top: auto;margin-bottom: auto;">
+                            </p>
+                        </li>
+                        <li class="text-white text-center" style="margin-right: 20px;">
+                            <p id="text_schedule_time" style="font-size: 24px;margin-top: auto;margin-bottom: auto;">
+                            </p>
+                        </li>
+                        <li class="nav-item dropdown hidden-caret">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+                                aria-expanded="false">
+                                <div class="avatar-sm">
+                                    <img src="./assets/img/inno.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                <li>
+                                    <div class="user-box">
+                                        <div class="avatar-lg"><img src="./assets/img/inno.jpg" alt="image profile"
+                                                class="avatar-img rounded"></div>
+                                        <div class="u-text">
+                                            <% if (typeof user!=='undefined' ) { %>
+                                                <h4 id="username">Xin chào <%= user%>
+                                                </h4>
+                                                <% } else { %>
+                                                    <h4 id="username">mung.tran@hanes.com</h4>
+                                                    <% } %>
+                                                        <p class="text-muted text-success">Leading the challange</p><a
+                                                            href="/logout"
+                                                            class="btn btn-rounded btn-danger btn-sm">Thoát</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </div>
+
+        <!-- Sidebar -->
+        <%- include ("./partials/mechanic-sewing-sidebar.ejs"); -%>
+			<div class="main-panel">
+                <div class="content" style="background-color: white;">
+                    <div class="row row-demo-grid">
+                        <div class="col-md-12" style="background-color: white;">
+                            <div class="card">
+                                <div class="card-body p-10" style="background-color: white;">
+                                    
+                                    <div class="row justify-content-center">
+                                        <div class="text-center d-flex align-items-center">
+                                            <h2 class="text-info"><i class="fas fa-magic" style="margin-right: 5px;"></i>Tổng số máy
+                                                |<span id="txt_total_machine" class="text-success">0</span>
+                                            </h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-lemon" style="margin-right: 5px;color: red;"></i>Đang
+                                                hỏng
+                                                |<span id="txt_broken_machine" class="text-danger">0</span></h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-registered" style="margin-right: 5px;color: orange;"></i>Đang
+                                                sửa |<span id="txt_repair_machine" class="text-warning">0</span></h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-broom" style="margin-right: 5px;color: purple;"></i>Chuyển đổi
+                                                |<span id="txt_changestyle_machine" class="text-muted">0</span></h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-comment-slash" style="margin-right: 5px;color: rgb(28, 194, 58);"></i>Xì khí
+                                                |<span id="txt_drop_air" class="text-muted">0</span></h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-broom" style="margin-right: 5px;color: blue;"></i>PM
+                                                |<span id="txt_pm_machine" class="text-muted">0</span></h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-fill-drip" style="margin-right: 5px;color: rgb(83, 150, 217);"></i>Hỏng bảo hộ
+                                                |<span id="txt_fail_protect" class="text-muted">0</span></h2>
+                                        </div>
+                                        <div class="text-center d-flex align-items-center" style="margin-left: 30px;">
+                                            <h2 class="text-info"><i class="fas fa-flag" style="margin-right: 5px;color: rgb(246, 135, 246);"></i>Đóng cuối ca
+                                                |<span id="txt_endshift" class="text-muted">0</span></h2>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h2 class="text-black">TỔNG HỢP THEO ZONE NHÓM CHUYỀN</h2>
+                                    <div class="row p-0" style="overflow-x: auto;">
+                                        <table class="table table-bordered" id="downtime_byzone">
+                                            <thead class="bg-success">
+                                                <tr>
+                                                    <!-- <th scope="col" class="text-center text-white" style="width: 120px;">Ca</th> -->
+                                                    <th scope="col" class="text-center text-white" style="width: 40px;">Zone</th>
+                                                    <th scope="col" class="text-center text-white"style="width: 140px;">Nhóm</th>
+                                                    <th scope="col" class="text-center text-white" style="width: 160px;">Downtime<br>Phút</th>
+                                                    <th scope="col" class="text-center text-white">Tổng số máy</th>
+                                                    <th scope="col" class="text-center text-white">Máy hỏng</th>
+                                                    <th scope="col" class="text-center text-white">Đang sửa</th>
+                                                    <th scope="col" class="text-center text-white">Chuyển đổi</th>
+                                                    <th scope="col" class="text-center text-white">Xì khí</th>
+                                                    <th scope="col" class="text-center text-white">PM</th>
+                                                    <th scope="col" class="text-center text-white">Hỏng bảo hộ</th>
+                                                    <th scope="col" class="text-center text-white">Đóng cuối ca</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                    <h2 class="text-black">THÔNG TIN CHI TIẾT MÁY HỎNG</h2>
+                                    <div class="row p-0" style="overflow-x: auto;">
+                                        <table class="table table-bordered" id="downtime_realtime_table">
+                                            <thead class="bg-info">
+                                                <tr>
+                                                    <th scope="col" class="text-center text-white">#</th>
+                                                    <th scope="col" class="text-center text-white">Zone</th>
+                                                    <th scope="col" class="text-center text-white">Nhóm</th>
+                                                    <th scope="col" class="text-center text-white">Line</th>
+                                                    <th scope="col" class="text-center text-white">ID Máy</th>
+                                                    <th scope="col" class="text-center text-white">Nhân viên</th>
+                                                    <th scope="col" class="text-center text-white">Công đoạn</th>
+                                                    <th scope="col" class="text-center text-white">Trạng thái</th>
+                                                    <th scope="col" class="text-center text-white">Downtime<br>Phút</th>
+                                                    <th scope="col" class="text-center text-white">Tên lỗi</th>
+                                                    <th scope="col" class="text-center text-white">Thợ máy</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+            <!--   Core JS Files   -->
+            <script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+            <script src="./assets/js/core/popper.min.js"></script>
+            <script src="./assets/js/core/bootstrap.min.js"></script>
+            <!-- jQuery UI -->
+            <script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+            <script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+            <!-- jQuery Scrollbar -->
+            <script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+            <!-- Moment JS -->
+            <script src="./assets/js/plugin/moment/moment.min.js"></script>
+            <!-- Chart JS -->
+            <script src="./assets/js/plugin/chart.js/chart.min.js"></script>
+            <!-- jQuery Sparkline -->
+            <script src="./assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+            <!-- Chart Circle -->
+            <script src="./assets/js/plugin/chart-circle/circles.min.js"></script>
+            <!-- Datatables -->
+            <script src="./assets/js/plugin/datatables/datatables.min.js"></script>
+            <!-- Bootstrap Notify -->
+            <script src="./assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+            <!-- Bootstrap Toggle -->
+            <script src="./assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+            <!-- jQuery Vector Maps -->
+            <script src="./assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+            <script src="./assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+            <!-- Google Maps Plugin -->
+            <script src="./assets/js/plugin/gmaps/gmaps.js"></script>
+            <!-- Sweet Alert -->
+            <script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+            <script src="./assets/js/ready.min.js"></script>
+            <script src="./assets/js/setting-demo.js"></script>
+                <!-- Custom JS -->
+            <script src="./JS/MechanicSewing/js-mechanic-sewing-downtime-realtime.js"></script>
+</body>
+
+</html>

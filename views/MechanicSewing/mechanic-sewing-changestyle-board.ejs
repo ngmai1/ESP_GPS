@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- <html lang="en" class="sidebar_minimize"> -->
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Sewing Mechanic</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+    <script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Open+Sans:300,400,600,700"] },
+            custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="./assets2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets2/css/azzara.min.css">
+    <link rel="stylesheet" href="./assets2/css/demo.css">
+    <!-- <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/azzara.min.css">
+    <link rel="stylesheet" href="./assets/css/demo.css"> -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main-header" data-background-color="purple">
+            <div class="logo-header">
+                <a href="/" class="logo">
+                    <h2 class="navbar-brand" style="color: white;">Mechanic Sewing</h2>
+                </a>
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </button>
+                <button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
+                <div class="navbar-minimize">
+                    <button class="btn btn-minimize btn-rounded">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="navbar navbar-header navbar-expand-lg">
+                <span class="navbar-brand text-white">
+                    <img src="./assets/img/icons8-plan-100.png" width="30" height="30" alt="">
+                    Bảng lịch trình chuyển đổi
+                </span>
+
+                <div class="container-fluid">
+                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                        <li style="margin-right: 15px;">
+                            <div class="container-fluid text-left">
+                                <div class="row justify-content-center">
+                                    <div class="input-group" style="width: 110px;">
+                                        <div class="input-group-prepend bg-primary">
+                                            <div class="input-group-text bg-primary text-white" style="border: 0;">Năm
+                                            </div>
+                                        </div>
+                                        <select class="form-control" id="txt_year" style="padding: 0;">
+                                        </select>
+                                    </div>
+                                    <div class="input-group" style="width: 110px;margin-left: 5px;">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-primary text-white" style="border: 0;">Tuần
+                                            </div>
+                                        </div>
+                                        <select class="form-control" id="txt_week" style="padding: 0;">
+                                        </select>
+                                    </div>
+                                    <div class="input-group" style="width: 130px;margin-left: 5px;"
+                                        style="display: block;">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-danger text-white" style="border: 0;">Nhóm
+                                            </div>
+                                        </div>
+                                        <select class="form-control" id="txt_group" style="padding: 0;">
+                                        </select>
+                                    </div>
+                                    <div class="input-group" style="width: 130px;margin-left: 5px;"
+                                        style="display: block;">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-danger text-white" style="border: 0;">Ngày
+                                            </div>
+                                        </div>
+                                        <select class="form-control" id="txt_shift" style="padding: 0;">
+                                            <option value=""></option>
+                                            <option value="T2">T2</option>
+                                            <option value="T3">T3</option>
+                                            <option value="T4">T4</option>
+                                            <option value="T5">T5</option>
+                                            <option value="T6">T6</option>
+                                            <option value="T7">T7</option>
+                                            <option value="CN">CN</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group" style="width: 80px;margin-left: 5px;">
+                                        <button class="btn btn-success" id="btn_update_board">Cập nhật</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avatar-sm">
+                                <img src="./assets/img/icons8-clock-64.png" alt="..." class="avatar-img">
+                            </div>
+                        </li>
+                        <li class="text-white text-center" style="margin-right: 10px;">
+                            <p id="text_schedule_shift" style="font-size: 18px;margin-top: auto;margin-bottom: auto;">
+                            </p>
+                        </li>
+                        <li class="text-white text-center" style="margin-right: 10px;">
+                            <p id="text_schedule_time" style="font-size: 18px;margin-top: auto;margin-bottom: auto;">
+                            </p>
+                        </li>
+                        <li class="nav-item dropdown hidden-caret">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+                                aria-expanded="false">
+                                <div class="avatar-sm">
+                                    <img src="./assets/img/inno.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                <li>
+                                    <div class="user-box">
+                                        <div class="avatar-lg"><img src="./assets/img/inno.jpg" alt="image profile"
+                                                class="avatar-img rounded"></div>
+                                        <div class="u-text">
+                                            <% if (typeof user!=='undefined' ) { %>
+                                                <h4 id="username">Xin chào <%= user%>
+                                                </h4>
+                                                <% } else { %>
+                                                    <h4 id="username">mung.tran@hanes.com</h4>
+                                                    <%} %>
+                                                        <p class="text-muted text-success">Leading the challange</p>
+                                                            <a
+                                                            href="../TemplateExcel/sewing_setup_change_style_template.xlsx"
+                                                            download="sewing_setup_change_style_template.xlsx"
+                                                            class="btn btn-rounded btn-primary btn-sm">Template</a>
+                                                            <a
+                                                            href="/logout"
+                                                            class="btn btn-rounded btn-danger btn-sm">Thoát</a>
+                                                        
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </div>
+        <%- include ("./partials/mechanic-sewing-sidebar.ejs"); -%>
+        <style>
+            .bg {
+                background-color: white;
+            }
+
+            .loader_custom {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+            <div class="main-panel" style="background-color: white;">
+                <div class="content">
+                    <div class="card">
+                        <div class="card-header" style="margin: 0;padding: 0;">
+                            <div class="card-header" style="margin: 2px; padding: 0;">
+                                <div class="card-head-row">
+                                    <div class="container-fluid text-left" style="padding: 0;">
+                                        <button class="btn btn-primary btn-lg" style="margin-right: 10px;">
+                                            Số chuyển đổi
+                                            <span class="badge badge-light" style="font-size: 1.1em;"
+                                                id="bag_total_change">0</span></button>
+
+                                        <button class="btn btn-success btn-lg" style="margin-right: 10px;">
+                                            Hoàn thành
+                                            <span class="badge badge-light" style="font-size: 1.1em;"
+                                                id="bag_total_done">0</span></button>
+                                        <button class="btn btn-warning btn-lg" style="margin-right: 10px;">
+                                            Đang thực hiện
+                                            <span class="badge badge-light" style="font-size: 1.1em;"
+                                                id="bag_total_process">0</span></button>
+
+                                        <button class="btn btn-danger btn-lg">
+                                            Còn lại
+                                            <span class="badge badge-light" style="font-size: 1.1em; "
+                                                id="bag_total_remaind">0</span></button>
+                                        </button>
+                                    </div>
+                                    <div class="card-tools">
+                                        <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab"
+                                            role="tablist">
+                                            <li class="nav-item">
+                                                <form id="upload_form" method='POST' action='sewing-machanic-upload-changestyle' submit='return false;'>
+                                                    <input type='file' name='file' id='file' style='display: none;'>
+                                                    <input type='submit' id='submit' style='display: none;'>
+                                                    <button class="btn btn-link" id="btn_upload" style="margin-right: 10px;"><i class="fa fa-link"></i>
+                                                        </span>Thư ký tải kế hoạch</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="table table-bordered" id="table_changestyle_dashboard">
+                                    <thead>
+                                        <tr>
+                                            <td rowspan="2"style="background-color:#716aca;color: white;text-align: center;width: 40px;">#</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;width: 100px;">Nhóm</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;">Mã mới</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;">Mã cũ</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;">Thông tin chi tiết</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;width: 80px;">Thời gian<br>chuyển</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;width: 95px;">Phương thức</td>
+                                            <td rowspan="2" style="background-color:#6f6f70;color: white;text-align: center;width: 80px;" 
+                                            data-toggle="tooltip" data-placement="top" 
+                                            data-html="true"
+                                            title="Mechanic Sup<br>
+                                                   - Cập nhật hành động chi tiết<br>
+                                                   - Cập nhật kết quả sau khi hoàn thành<br>
+                                                   - Công việc chuẩn bị cần hoàn tất trước 1 ca chuyển đổi"
+                                                >
+                                                    Tiến độ chuẩn bị<br>máy tại chuyền
+                                                </td>
+                                            <td colspan="3" style="background-color:#716aca;color: white;text-align: center;"
+                                            data-toggle="tooltip" data-placement="top" 
+                                            data-html="true"
+                                            title="SMED Sup<br>
+                                                   - Cập nhật hành động chi tiết<br>
+                                                   - Cập nhật kết quả sau khi hoàn thành<br>
+                                                   - Công việc chuẩn bị cần hoàn tất trước 1 ca chuyển đổi"
+                                                   >Tiến độ chuẩn bị máy SMED</td>
+                                            <td rowspan="2" style="background-color:#6f6f70;color: white;text-align: center;width: 80px;"
+                                            data-toggle="tooltip" data-placement="top" 
+                                            data-html="true"
+                                            title="Chuyền trưởng/Ca trưởng<br>
+                                                   - Cập nhật hành động chi tiết<br>
+                                                   - Cập nhật kết quả sau khi hoàn thành<br>
+                                                   - Công việc chuẩn bị cần hoàn tất trước 1 ca chuyển đổi"
+                                                   >SMED<br>checklist</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;width: 120px;"
+                                            data-toggle="tooltip" data-placement="top" 
+                                            data-html="true"
+                                            title="- Leader chuyển đổi theo dõi tiến độ đảm bảo mức độ sẵn sàng 100% trước thời điểm chuyển đổi.<br>
+                                            - Các chuyển đổi chưa đạt 100% cần có quyết định từ Tùng/Nhật có thực hiện chuyển đổi hay không
+                                            "
+                                                   >Mức độ<br>sẵn sàng</td>
+                                            <td rowspan="2" style="background-color:#716aca;color: white;text-align: center;width: 80px;">Thay đổi<br>chuyển đổi</td>
+                                        </tr>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#6f6f70;color: white;text-align: center;width: 120px;">Máy test<br> thô</td>
+                                            <td style="background-color:#6f6f70;color: white;text-align: center;width: 180px;">Máy setup đúng kiểu chỉ<br>Nhân viên vận hành</td>
+                                            <td style="background-color:#6f6f70;color: white;text-align: center;width: 120px;">Máy sẵn sàng chuyển đổi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="loader loader-danger loader_custom" id="txt_loader"></div>
+            </div>
+            
+            <!-- Model Mechanic Function -->
+            <div class="modal" id="modal_update_task" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document" style="width: fit-content;">
+                    <div class="modal-content">
+                        <div class="modal-header text-white" id="txt_modal_body">
+                            <h2 class="modal-title"><span id="txt_title_task"></span></h2>
+                            <form>
+                                <p style="display: none;"id='txt_TagID'></p>
+                                <p style="display: none;"id='txt_mode_task'></p>
+                            </form>
+                            
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                style="color: white;">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-1">
+                            <div class="input-group col-md-12"  style="margin-top: 10px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info">
+                                        <i class="fas fa-user-tag"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Scan thẻ/ Nhập IDNV"
+                                    id="txt_task_ID_Card" autofocus>
+                                <button type="button" class="btn btn-icon btn-round btn-primary"
+                                    id='btn_clear_task_IDCard' style="margin-left: 5px;">
+                                    <i class="fas fa-recycle"></i>
+                                </button>
+                            </div>
+                            <div class="input-group col-md-12" style="margin-top: 10px;">
+                                <div class="form-group form-inline">
+                                    <i class="la fas fa-user-astronaut text-warning"
+                                        style="margin-right: 5px;font-size: 20px;"></i>
+                                    <span style="font-size: 14px;" id="txt_task_employee_submit"></span>
+                                </div>
+                            </div>
+                            <div class="input-group col-md-12" style="margin-top: 10px;">
+                                <div class="form-group col-md-12">
+                                    <label for="txt_task_note" style="color: purple;">GHI CHÚ MỞ NGHIỆP VỤ</label>
+                                    <textarea class="form-control" id="txt_task_note" rows="3"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="input-group float-left" style="width: 160px;">
+                                <div class="input-group-prepend bg-primary">
+                                    <div class="input-group-text bg-primary text-white" style="border: 0;">Thay đổi</div>
+                                </div>
+                                <select class="form-control" id="txt_changeTask" style="padding: 0;">
+                                    <option value="Y">OK</option selected>
+                                    <option value="">XÓA</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-success float-right" id="btn_update_task_SMED" style="margin-left: 100px;">
+                                <span class="btn-label">
+                                    <i class="fas fa-chevron-circle-down"></i>
+                                </span>Cập nhật
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="modal_change_time" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document" style="width: fit-content;">
+                    <div class="modal-content">
+                        <div class="modal-header text-white bg-danger">
+                            <h2 class="modal-title">THAY ĐỔI THỜI GIAN CHUYỂN ĐỔI</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                style="color: white;">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-1">
+                            <div class="form-row align-items-center col-12" style="margin-top: 15px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary text-white" id="txt_changeID" style="font-size: 20px;"></span>
+                                </div>
+                            </div>
+                            <div class="form-row align-items-center col-12" style="margin-top: 15px;">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-info text-white">Tuần</span>
+                                        </div>
+                                        <input type="text" class="form-control " id="txt_oldWeek" readonly style="color: black;">
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-info text-white">Thời điểm</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="txt_oldShift" readonly style="color: black;">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="form-control" id="txt_TagIDChange" readonly style="color: black;display: none;">
+                                    <input type="text" class="form-control" id="txt_YearChange" readonly style="color: black;display: none;">
+                                    <input type="text" class="form-control" id="txt_GroupChange" readonly style="color: black;display: none;">
+                                    <input type="text" class="form-control" id="txt_OLdStyleChange" readonly style="color: black;display: none;">
+                                    <input type="text" class="form-control" id="txt_NewStyleChange" readonly style="color: black;display: none;">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-row align-items-center col-12" style="margin-top: 15px;">
+                                <div>
+                                    <span style="font-weight: bold;color: green;">CẬP NHẬT THỜI GIAN MỚI</span>
+                                </div>
+                            </div>
+                            <div class="form-row align-items-center col-12" style="margin-top: 15px;">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-primary text-white">Tuần mới</span>
+                                            
+                                        </div>
+                                        <select class="form-control" id="txt_newWeek" style="padding: 0;">
+                                            <option value=""></option>
+                                            <option value="W01">W01</option>
+                                            <option value="W02">W02</option>
+                                            <option value="W03">W03</option>
+                                            <option value="W04">W04</option>
+                                            <option value="W05">W05</option>
+                                            <option value="W06">W06</option>
+                                            <option value="W07">W07</option>
+                                            <option value="W08">W08</option>
+                                            <option value="W09">W09</option>
+                                            <option value="W10">W10</option>
+                                            <option value="W11">W11</option>
+                                            <option value="W12">W12</option>
+                                            <option value="W13">W13</option>
+                                            <option value="W14">W14</option>
+                                            <option value="W15">W15</option>
+                                            <option value="W16">W16</option>
+                                            <option value="W17">W17</option>
+                                            <option value="W18">W18</option>
+                                            <option value="W19">W19</option>
+                                            <option value="W20">W20</option>
+                                            <option value="W21">W21</option>
+                                            <option value="W22">W22</option>
+                                            <option value="W23">W23</option>
+                                            <option value="W24">W24</option>
+                                            <option value="W25">W25</option>
+                                            <option value="W26">W26</option>
+                                            <option value="W27">W27</option>
+                                            <option value="W28">W28</option>
+                                            <option value="W29">W29</option>
+                                            <option value="W30">W30</option>
+                                            <option value="W31">W31</option>
+                                            <option value="W32">W32</option>
+                                            <option value="W33">W33</option>
+                                            <option value="W34">W34</option>
+                                            <option value="W35">W35</option>
+                                            <option value="W36">W36</option>
+                                            <option value="W37">W37</option>
+                                            <option value="W38">W38</option>
+                                            <option value="W39">W39</option>
+                                            <option value="W40">W40</option>
+                                            <option value="W41">W41</option>
+                                            <option value="W42">W42</option>
+                                            <option value="W43">W43</option>
+                                            <option value="W44">W44</option>
+                                            <option value="W45">W45</option>
+                                            <option value="W46">W46</option>
+                                            <option value="W47">W47</option>
+                                            <option value="W48">W48</option>
+                                            <option value="W49">W49</option>
+                                            <option value="W50">W50</option>
+                                            <option value="W51">W51</option>
+                                            <option value="W52">W52</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-primary text-white">Ngày mới</span>
+                                            
+                                        </div>
+                                        <select class="form-control" id="txt_newShift" style="padding: 0;">
+                                            <option value=""></option>
+                                            <option value="C1T2">C1T2</option>
+                                            <option value="C2T2">C2T2</option>
+                                            <option value="C1T3">C1T3</option>
+                                            <option value="C2T3">C2T3</option>
+                                            <option value="C1T4">C1T4</option>
+                                            <option value="C2T4">C2T4</option>
+                                            <option value="C1T5">C1T5</option>
+                                            <option value="C2T5">C2T5</option>
+                                            <option value="C1T6">C1T6</option>
+                                            <option value="C2T6">C2T6</option>
+                                            <option value="C1T7">C1T7</option>
+                                            <option value="C2T7">C2T7</option>
+                                            <option value="C1CN">C1CN</option>
+                                            <option value="C2CN">C2CN</option>
+       
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary float-right" id="btn_update_changethime">
+                                <span class="btn-label">
+                                    <i class="fas fa-chevron-circle-down"></i>
+                                </span>Cập nhật</button>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="./assets/js/core/popper.min.js"></script>
+    <script src="./assets/js/core/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- Moment JS -->
+    <script src="./assets/js/plugin/moment/moment.min.js"></script>
+    <!-- Chart JS -->
+    <script src="./assets/js/plugin/chart.js/chart.min.js"></script>
+    <!-- jQuery Sparkline -->
+    <script src="./assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <!-- Chart Circle -->
+    <script src="./assets/js/plugin/chart-circle/circles.min.js"></script>
+    <!-- Datatables -->
+    <script src="./assets/js/plugin/datatables/datatables.min.js"></script>
+    <!-- Bootstrap Notify -->
+    <script src="./assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <!-- Bootstrap Toggle -->
+    <script src="./assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+    <!-- jQuery Vector Maps -->
+    <script src="./assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+    <script src="./assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+    <!-- Google Maps Plugin -->
+    <script src="./assets/js/plugin/gmaps/gmaps.js"></script>
+    <!-- Sweet Alert -->
+    <script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <!-- Azzara JS -->
+    <script src="./assets/js/setting-demo.js"></script>
+    <script src="./assets/js/ready.min.js"></script>
+    <!-- Custom JS -->
+    <script src="./JS/MechanicSewing/js-mechanic-sewing-change-style-board.js"></script>
+</body>
+
+</html>
