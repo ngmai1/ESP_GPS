@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_72a8d23b932be279b6d8db5e2f5de6a6 {
+                #map_8e0c89a6d41b6178e833000f209b87c5 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -41,7 +41,7 @@
     function autoRefresh() {
         setTimeout(function() {
             location.reload();
-        }, 30000); // 60000 milliseconds = 60 seconds
+        }, 30000); // 30000 milliseconds = 60 seconds
     }
     // Call the function when the page loads
     window.onload = autoRefresh;
@@ -50,14 +50,14 @@
 <body>
     
     
-            <div class="folium-map" id="map_72a8d23b932be279b6d8db5e2f5de6a6" ></div>
+            <div class="folium-map" id="map_8e0c89a6d41b6178e833000f209b87c5" ></div>
         
 </body>
 <script>
     
     
-            var map_72a8d23b932be279b6d8db5e2f5de6a6 = L.map(
-                "map_72a8d23b932be279b6d8db5e2f5de6a6",
+            var map_8e0c89a6d41b6178e833000f209b87c5 = L.map(
+                "map_8e0c89a6d41b6178e833000f209b87c5",
                 {
                     center: [16.4637, 107.5909],
                     crs: L.CRS.EPSG3857,
@@ -71,73 +71,73 @@
 
         
     
-            var tile_layer_7ec3e46dde1ab29c87415be55953730d = L.tileLayer(
+            var tile_layer_4fcf92dae159992c23011bfdb6db56f3 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
             );
         
     
-            tile_layer_7ec3e46dde1ab29c87415be55953730d.addTo(map_72a8d23b932be279b6d8db5e2f5de6a6);
+            tile_layer_4fcf92dae159992c23011bfdb6db56f3.addTo(map_8e0c89a6d41b6178e833000f209b87c5);
         
     
-            var marker_7fc404a56b97661b16c3b4abd9ffbaa5 = L.marker(
+            var marker_97df0b8999e18b2da88f2bb1b989a3dc = L.marker(
                 [16.4637, 107.5909],
                 {}
-            ).addTo(map_72a8d23b932be279b6d8db5e2f5de6a6);
+            ).addTo(map_8e0c89a6d41b6178e833000f209b87c5);
         
     
-        var popup_7bee5442494833472b41a069c8cbfcf4 = L.popup({"maxWidth": "100%"});
+        var popup_98580addee11f47664c3b0795deab0d0 = L.popup({"maxWidth": "100%"});
 
         
             
-                var html_ee54f1d60ab7be6e0cd5caf2f18737c1 = $(`<div id="html_ee54f1d60ab7be6e0cd5caf2f18737c1" style="width: 100.0%; height: 100.0%;">Location: Imperial City</div>`)[0];
-                popup_7bee5442494833472b41a069c8cbfcf4.setContent(html_ee54f1d60ab7be6e0cd5caf2f18737c1);
+                var html_05c2620099329c5b27bb2b3c4bb1762e = $(`<div id="html_05c2620099329c5b27bb2b3c4bb1762e" style="width: 100.0%; height: 100.0%;">Location: Imperial City</div>`)[0];
+                popup_98580addee11f47664c3b0795deab0d0.setContent(html_05c2620099329c5b27bb2b3c4bb1762e);
             
         
 
-        marker_7fc404a56b97661b16c3b4abd9ffbaa5.bindPopup(popup_7bee5442494833472b41a069c8cbfcf4)
+        marker_97df0b8999e18b2da88f2bb1b989a3dc.bindPopup(popup_98580addee11f47664c3b0795deab0d0)
         ;
 
         
     
     
-            var marker_6cc6b7bdf13a16f93a542ecd7f532687 = L.marker(
+            var marker_47c864b8557cf99831aa07c64e36a9f5 = L.marker(
                 [16.4637, 107.5855],
                 {}
-            ).addTo(map_72a8d23b932be279b6d8db5e2f5de6a6);
+            ).addTo(map_8e0c89a6d41b6178e833000f209b87c5);
         
     
-        var popup_db58d549cf3c20ab30bc6492f48f1df8 = L.popup({"maxWidth": "100%"});
+        var popup_d30d06e7e1665b2ac02aedd1d6494ec8 = L.popup({"maxWidth": "100%"});
 
         
             
-                var html_301a80b81826eeea631cb39a4dadd8bb = $(`<div id="html_301a80b81826eeea631cb39a4dadd8bb" style="width: 100.0%; height: 100.0%;">Location: Perfume River</div>`)[0];
-                popup_db58d549cf3c20ab30bc6492f48f1df8.setContent(html_301a80b81826eeea631cb39a4dadd8bb);
+                var html_0b8c67c57eca80bf6516f2834061cf12 = $(`<div id="html_0b8c67c57eca80bf6516f2834061cf12" style="width: 100.0%; height: 100.0%;">Location: Perfume River</div>`)[0];
+                popup_d30d06e7e1665b2ac02aedd1d6494ec8.setContent(html_0b8c67c57eca80bf6516f2834061cf12);
             
         
 
-        marker_6cc6b7bdf13a16f93a542ecd7f532687.bindPopup(popup_db58d549cf3c20ab30bc6492f48f1df8)
+        marker_47c864b8557cf99831aa07c64e36a9f5.bindPopup(popup_d30d06e7e1665b2ac02aedd1d6494ec8)
         ;
 
         
     
     
-            var marker_41fb28b2bf7538d692c0ab8a37c541df = L.marker(
+            var marker_4bab556c5e650d08923c9b2cebb0a45c = L.marker(
                 [16.469, 107.5944],
                 {}
-            ).addTo(map_72a8d23b932be279b6d8db5e2f5de6a6);
+            ).addTo(map_8e0c89a6d41b6178e833000f209b87c5);
         
     
-        var popup_384749f188e61959f47da2be40f1d5ab = L.popup({"maxWidth": "100%"});
+        var popup_6bf73d84287481688ad031800e6b245e = L.popup({"maxWidth": "100%"});
 
         
             
-                var html_693c2d0bebde6b3c187d2cc589d65fed = $(`<div id="html_693c2d0bebde6b3c187d2cc589d65fed" style="width: 100.0%; height: 100.0%;">Location: Dong Ba Market</div>`)[0];
-                popup_384749f188e61959f47da2be40f1d5ab.setContent(html_693c2d0bebde6b3c187d2cc589d65fed);
+                var html_dad11aef630de3dd950fa6fedfefe5f5 = $(`<div id="html_dad11aef630de3dd950fa6fedfefe5f5" style="width: 100.0%; height: 100.0%;">Location: Dong Ba Market</div>`)[0];
+                popup_6bf73d84287481688ad031800e6b245e.setContent(html_dad11aef630de3dd950fa6fedfefe5f5);
             
         
 
-        marker_41fb28b2bf7538d692c0ab8a37c541df.bindPopup(popup_384749f188e61959f47da2be40f1d5ab)
+        marker_4bab556c5e650d08923c9b2cebb0a45c.bindPopup(popup_6bf73d84287481688ad031800e6b245e)
         ;
 
         

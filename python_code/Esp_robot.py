@@ -31,7 +31,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.setWindowIcon(QtGui.QIcon('bom.ico'))
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        url = QUrl.fromUserInput("E:/Git_project/Esp32_socket/python_code/map.html")
+        url = QUrl.fromUserInput("D:/Git/ESP_GPS/python_code/map.html")
         self.ui.widget_web.load(url)
         self.init_event()
 
