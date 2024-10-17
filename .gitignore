@@ -4,6 +4,7 @@
 # Ignore the temp directory
 temp/
 node_modules/
+python_code/__pycache__
 
 # Ignore a specific file
 secret.txt
