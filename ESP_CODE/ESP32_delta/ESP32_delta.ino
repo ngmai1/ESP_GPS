@@ -6,8 +6,8 @@
 // Khai báo biến toàn cục cho chân LED
 #define ledPin 2 // Chân LED trên ESP32
 // Khai báo các chân RX và TX cho Serial2
-#define RXD2 16
-#define TXD2 17
+#define RXD2 16 // DAY XANH RXD MODULE RS485
+#define TXD2 17 // DAY VANG TXD MODULE RS485
 
 
 
@@ -38,7 +38,6 @@ void setup() {
  // Thiết lập chế độ cho chân LED là đầu ra
   pinMode(ledPin, OUTPUT);
   // Bắt đầu giao tiếp Serial2 với tốc độ baud 115200 và khai báo các chân RX, TX
-
   Serial2.begin(9600, SERIAL_7E1, RXD2, TXD2);
 
 
