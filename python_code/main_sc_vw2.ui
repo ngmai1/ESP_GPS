@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1226</width>
-    <height>885</height>
+    <width>1167</width>
+    <height>884</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(0, 72, 106);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
@@ -34,7 +34,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="2,2,2,20">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,20">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="100,51,300">
             <item>
@@ -87,7 +87,7 @@
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_3">
                   <item>
-                   <widget class="QLabel" name="label_7">
+                   <widget class="QLabel" name="lbl_utc_date_time">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -114,7 +114,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_3">
+                   <widget class="QLabel" name="lbl_latitude">
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
@@ -141,7 +141,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_4">
+                   <widget class="QLabel" name="lbl_longitude">
                     <property name="font">
                      <font>
                       <pointsize>12</pointsize>
@@ -162,7 +162,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_5">
+                   <widget class="QLabel" name="lbl_angle">
                     <property name="font">
                      <font>
                       <pointsize>12</pointsize>
@@ -183,7 +183,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_6">
+                   <widget class="QLabel" name="lbl_rs_angle">
                     <property name="font">
                      <font>
                       <pointsize>12</pointsize>
@@ -221,23 +221,27 @@
                </layout>
               </item>
               <item>
-               <widget class="QLabel" name="lbl_robot_pic">
-                <property name="maximumSize">
-                 <size>
-                  <width>300</width>
-                  <height>300</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap>sim/dd.jpg</pixmap>
-                </property>
-                <property name="scaledContents">
-                 <bool>true</bool>
-                </property>
-               </widget>
+               <layout class="QGridLayout" name="gridLayout_2">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="lbl_robot_pic">
+                  <property name="maximumSize">
+                   <size>
+                    <width>200</width>
+                    <height>200</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap>sim/dd.jpg</pixmap>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item>
                <spacer name="horizontalSpacer_5">
@@ -305,7 +309,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QLabel" name="label_2">
+               <widget class="QLabel" name="lbl_system_datetime">
                 <property name="font">
                  <font>
                   <pointsize>12</pointsize>
@@ -353,7 +357,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox">
+               <widget class="QComboBox" name="cb_date_select">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -391,7 +395,7 @@
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_2">
                  <item>
-                  <widget class="QRadioButton" name="radioButton">
+                  <widget class="QRadioButton" name="radio_manual">
                    <property name="styleSheet">
                     <string notr="true">color: rgb(255, 170, 0);</string>
                    </property>
@@ -401,7 +405,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QRadioButton" name="radioButton_2">
+                  <widget class="QRadioButton" name="radio_auto">
                    <property name="styleSheet">
                     <string notr="true">color: rgb(255, 170, 0);</string>
                    </property>
@@ -414,7 +418,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="btn_refresh_map">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                   <horstretch>10</horstretch>
@@ -450,7 +454,7 @@ border-radius: 5%;</string>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="150,1,300">
             <item>
-             <widget class="QTableWidget" name="tableWidget_topRecord"/>
+             <widget class="QTableWidget" name="tb_widget_log"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_2">
@@ -488,87 +492,99 @@ border-radius: 5%;</string>
        <attribute name="title">
         <string>Robot Setting</string>
        </attribute>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>850</x>
-          <y>250</y>
-          <width>241</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 170, 0);
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_6" stretch="3,1,1,8">
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="lbl_history">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 170, 0);</string>
+              </property>
+              <property name="text">
+               <string>ESP POST LOG HISTORY</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_rs_angle">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 170, 0);
 </string>
-        </property>
-        <property name="text">
-         <string>&gt;&gt;&gt;Reset _ Angle&lt;&lt;&lt;</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lbl_web_logs">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>320</y>
-          <width>1061</width>
-          <height>481</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(0, 255, 0);</string>
-        </property>
-        <property name="text">
-         <string>Web logs</string>
-        </property>
-       </widget>
-       <widget class="Line" name="line">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>283</y>
-          <width>1061</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lbl_history">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>260</y>
-          <width>361</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 170, 0);</string>
-        </property>
-        <property name="text">
-         <string>ESP POST LOG HISTORY</string>
-        </property>
-       </widget>
+              </property>
+              <property name="text">
+               <string>&gt;&gt;&gt;Reset _ Angle&lt;&lt;&lt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_web_logs">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 255, 0);</string>
+            </property>
+            <property name="text">
+             <string>Web logs</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
