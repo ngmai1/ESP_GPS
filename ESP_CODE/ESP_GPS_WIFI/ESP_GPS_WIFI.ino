@@ -139,7 +139,7 @@ void loop() {
             lcd.print(latitude);
             lcd.print("N");
             lcd.setCursor(0,2);
-            lcd.print("            ");
+            lcd.print("           ");
             lcd.setCursor(0,2);
             lcd.print(longitude);
             lcd.print("E");

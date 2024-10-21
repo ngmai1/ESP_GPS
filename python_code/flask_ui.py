@@ -24,6 +24,7 @@ engine_ttp = create_engine('mysql+mysqlconnector://ttpdept:plcgpsd@localhost:330
 mydb=mysql.connector.connect(host="localhost", user='ttpdept', passwd='plcgpsd', database="ttp")
 myCursor=mydb.cursor()
 rs_angle_server="OK"
+time_query="xxxx-xx-xx xx:xx:xx"
 
 # Flask app
 flask_app = Flask(__name__)
@@ -112,12 +113,20 @@ class draw_map(QThread):
 
     @pyqtSlot()
     def run(self):
+        global time_query
         m=1
         while True:
             try:
-                last_10_sql="""
-                select timeupdate,latitude,longitude,angle,rs_status from ttp.robot_wifi_gps where latitude like '%.%' and longitude like '%.%' order by timeupdate desc limit 300;
-                """
+                if time_query=="xxxx-xx-xx xx:xx:xx":
+                    last_10_sql="""
+                    select timeupdate,latitude,longitude,angle,rs_status from ttp.robot_wifi_gps where latitude like '%.%' and longitude like '%.%' order by timeupdate desc limit 300;
+                    """
+                else:
+                    last_10_sql=f"""
+                    select timeupdate,latitude,longitude,angle,rs_status from ttp.robot_wifi_gps 
+                    where timeupdate>="{time_query}" latitude like '%.%' and longitude like '%.%' 
+                    order by timeupdate desc limit 300;
+                    """
                 data=pd.read_sql(last_10_sql,engine_ttp)
                 top_20_data=data.head(15)
                 top_20_data['latitude']=top_20_data['latitude']+" N"
@@ -235,6 +244,7 @@ class MyWindow(QMainWindow):
         print('form have been load')
         self.ui.btn_rs_angle.clicked.connect(self.reset_angle)
 
+
     def reset_angle(self):
         global rs_angle_server
         print(rs_angle_server)
@@ -250,7 +260,7 @@ class MyWindow(QMainWindow):
         timeupdate=self.ui.lbl_system_datetime.text()
         text_log=self.ui.lbl_web_logs.text()
         text_log+="\n"
-        text_log+=f"""-{timeupdate} : {lat} N - {lon} E - Angle : {angle} - Rs_Angle: {rs_angle}"""
+        text_log+=f"""-{timeupdate} : {lat} N - {lon} E - Góc Trục Quay : {angle} - Rs_Angle: {rs_angle}"""
         text_log=text_log[-500:]
         self.ui.lbl_web_logs.setText(text_log)
 
@@ -282,6 +292,7 @@ class MyWindow(QMainWindow):
         headers.setFont(font)  # Apply the modified font to the header
 
 
+        
 
 
 

@@ -24,7 +24,7 @@ engine_ttp = create_engine('mysql+mysqlconnector://ttpdept:plcgpsd@localhost:330
 mydb=mysql.connector.connect(host="localhost", user='ttpdept', passwd='plcgpsd', database="ttp")
 myCursor=mydb.cursor()
 rs_angle_server="OK"
-
+time_query="xxxx-xx-xx xx:xx:xx"
 # Flask app
 # flask_app = Flask(__name__)
 
@@ -102,6 +102,26 @@ class refresh_time_sys(QThread):
             self.time_string.emit(formatted_date_time)
             time.sleep(1)
 
+class export_data_excel(QThread):
+    exported_path = pyqtSignal(str)
+
+    def __init__(self, starttime):
+        super(export_data_excel, self).__init__()
+        self.starttime=starttime
+
+    @pyqtSlot()
+    def run(self):
+        stoptime_qr=f"""select stoptime,tracking_note from ttp.tracking_log where starttime="{self.starttime}"
+        """
+        # while True:
+        #     # Get the current date and time
+        #     now = datetime.now()
+        #     # Format it as "yyyy-mm-dd HH:MM:SS"
+        #     formatted_date_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        #     self.exported_path.emit(formatted_date_time)
+        #     time.sleep(1)
+
+
 
 class draw_map(QThread):
     map_exported = pyqtSignal(str)
@@ -112,14 +132,23 @@ class draw_map(QThread):
 
     @pyqtSlot()
     def run(self):
+        global time_query
         m=1
         while True:
             try:
-                last_10_sql="""
-                select timeupdate,latitude,longitude,angle,rs_status from ttp.robot_wifi_gps 
-                where latitude like '%.%' and longitude like '%.%'
-                order by timeupdate desc limit 300;
-                """
+            # if 1>0:
+                print("draw map time",time_query)
+                if time_query=="xxxx-xx-xx xx:xx:xx":
+                    last_10_sql="""
+                    select timeupdate,latitude,longitude,angle,rs_status from ttp.robot_wifi_gps where latitude like '%.%' and longitude like '%.%' order by timeupdate desc limit 300;
+                    """
+                else:
+                    last_10_sql=f"""
+                    select timeupdate,latitude,longitude,angle,rs_status from ttp.robot_wifi_gps 
+                    where timeupdate>="{time_query}" and latitude like '%.%' and longitude like '%.%' 
+                    order by timeupdate desc limit 300;
+                    """
+                print(last_10_sql)
                 data=pd.read_sql(last_10_sql,engine_ttp)
                 top_20_data=data.head(15)
                 top_20_data['latitude']=top_20_data['latitude']+" N"
@@ -236,6 +265,8 @@ class MyWindow(QMainWindow):
     def load_form(self):
         print('form have been load')
         self.ui.btn_rs_angle.clicked.connect(self.reset_angle)
+        self.ui.btn_start_record.clicked.connect(self.start_record)
+        self.ui.btn_stop_record.clicked.connect(self.stop_record)
 
     def reset_angle(self):
         global rs_angle_server
@@ -244,15 +275,15 @@ class MyWindow(QMainWindow):
         print('reset angle clicked', rs_angle_server)
 
     def append_log_flask(self, lat,lon,angle,rs_angle,utc,gps_date):
-        self.ui.lbl_latitude.setText("Latitude: "+lat+" N")
-        self.ui.lbl_longitude.setText("Longitude: "+lon+" E")
-        self.ui.lbl_angle.setText("Angle: "+angle)
-        self.ui.lbl_rs_angle.setText("RS_Status: "+rs_angle)
+        self.ui.lbl_latitude.setText("Vĩ độ: "+lat+" N")
+        self.ui.lbl_longitude.setText("Kinh độ: "+lon+" E")
+        self.ui.lbl_angle.setText("độ Sâu: "+angle)
+        self.ui.lbl_rs_angle.setText("trạng thái rs: "+rs_angle)
         self.ui.lbl_utc_date_time.setText(utc+" - "+gps_date)
         timeupdate=self.ui.lbl_system_datetime.text()
         text_log=self.ui.lbl_web_logs.text()
         text_log+="\n"
-        text_log+=f"""-{timeupdate} : {lat} N - {lon} E - Angle : {angle} - Rs_Angle: {rs_angle}"""
+        text_log+=f"""-{timeupdate} : {lat} N - {lon} E - Góc Trục Quay : {angle} - Rs_Angle: {rs_angle}"""
         text_log=text_log[-960:]
         self.ui.lbl_web_logs.setText(text_log)
 
@@ -283,7 +314,37 @@ class MyWindow(QMainWindow):
         font.setBold(True)
         headers.setFont(font)  # Apply the modified font to the header
 
-
+    def start_record(self):
+        global time_query
+        print('start record')
+        cr_dt=self.ui.lbl_system_datetime.text()
+        
+        print('time_query',time_query)
+        note_trk=self.ui.txt_note_tracking.text()
+        if note_trk=="":
+            QMessageBox.about(self, 'Chú ý',"cần ghi chú lại nội dung tracking (tracking note)")
+        else:
+            sql_insert=f"""
+            insert into ttp.tracking_log (starttime,tracking_note)
+            values
+            ("{cr_dt}","{note_trk}")
+            """
+            myCursor.execute(sql_insert)
+            mydb.commit()
+            self.ui.lbl_time_start.setText(cr_dt)
+            time_query=cr_dt
+    
+    def stop_record(self):
+        global time_query
+        print('stop record')
+        cr_dt=self.ui.lbl_system_datetime.text()
+        sql_stop_record=f"""
+        update ttp.tracking_log set stoptime=now() where starttime="{cr_dt}"
+        """
+        myCursor.execute(sql_stop_record)
+        mydb.commit()
+        self.ui.lbl_time_start.setText("xxxx-xx-xx xx:xx:xx")
+        time_query="xxxx-xx-xx xx:xx:xx"
 
 
 
