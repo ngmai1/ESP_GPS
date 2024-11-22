@@ -5,6 +5,9 @@
 temp/
 node_modules/
 python_code/__pycache__
+python_code/dist
+python_code/build
+
 
 # Ignore a specific file
 secret.txt
